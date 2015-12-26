@@ -13,14 +13,14 @@ public class SqlTable implements Source {
 		this.etlSubject.setSource(this);
 	}
 
-	public void capitalizeContent() {
-		System.out.println("capitalizing content from sql table - Start");
+	public void capitalizeContent(Object input, Object output) {
+		System.out.println("\ncapitalizing content from sql table - Start");
 		System.out.println("capitalizing content from sql table - Implementation goes here");
 		System.out.println("capitalizing content from sql table - End");
 	}
 
-	public void countWords() {
-		System.out.println("counting unique words from sql table - Start");
+	public void countWords(Object input, Object output) {
+		System.out.println("\ncounting unique words from sql table - Start");
 		System.out.println("counting unique words from sql table - Implementation goes here");
 		System.out.println("counting unique words from sql table - End");
 	}

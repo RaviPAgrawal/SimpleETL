@@ -18,18 +18,6 @@ public class TextFile implements Source {
 	
 	public static final String outputFolder = "output";
 	
-	public static final String capitalizeFileName = "capitalizeMyContent.txt";
-	
-	public static final String countContentFileName = "countMyContent.txt";
-	
-	public static final String capitalizeTaskInputFilePath = capitalizeTaskDirPath + File.separator + inputFolder + File.separator + capitalizeFileName;
-
-	public static final String capitalizeTaskOutputFilePath = capitalizeTaskDirPath + File.separator + outputFolder + File.separator + capitalizeFileName;
-	
-	public static final String countWordsTaskInputFilePath = countWordsTaskDirPath + File.separator + inputFolder + File.separator + countContentFileName;
-
-	public static final String countWordsTaskOutputFilePath = countWordsTaskDirPath + File.separator + outputFolder + File.separator + countContentFileName;
-
 	private EtlSubject etlSubject;
 	
 	public TextFile(){
@@ -41,34 +29,48 @@ public class TextFile implements Source {
 		this.etlSubject.setSource(this);
 	}
 
-	public void capitalizeContent() {
-		System.out.println("capitalizing content from Text file - Start");
-
-		String fileContent = Utility.getStringDataFromFile(new File(capitalizeTaskInputFilePath));
-		try{
-			PrintWriter outputWriter = new PrintWriter(new File(capitalizeTaskOutputFilePath));
-			outputWriter.print(fileContent.toUpperCase());
-			outputWriter.close();
-		} catch(IOException e){
-			e.printStackTrace();
+	public void capitalizeContent(Object input, Object output) {
+		System.out.println("\ncapitalizing content from Text file - Start");
+		System.out.println("capitalizing content from Text file - Performing operation...");
+		
+		File inputDir = (File) input;
+		File outputDir = (File) output;
+		
+		for (File inputFile : inputDir.listFiles()) {
+			String fileContent = Utility.getStringDataFromFile(inputFile);
+			try{
+				File outputFile = new File(outputDir, inputFile.getName());
+				PrintWriter outputWriter = new PrintWriter(outputFile);
+				outputWriter.print(fileContent.toUpperCase());
+				outputWriter.close();
+			} catch(IOException e){
+				e.printStackTrace();
+			}
 		}
 		
 		System.out.println("capitalizing content from Text file - End");
 	}
 
-	public void countWords() {
-		System.out.println("counting unique words from Text file - Start");
+	public void countWords(Object input, Object output) {
+		System.out.println("\ncounting unique words from Text file - Start");
+		System.out.println("counting unique words from Text file - Performing operation...");
 		
-		String fileContent = Utility.getStringDataFromFile(new File(countWordsTaskInputFilePath));
-		String[] array = fileContent.split(" ");
-		Map<String, Integer> contentCountMap = getContentCountMap(array);
-		String outputData = getContentCountMapDataInString(contentCountMap);
-		try{
-			PrintWriter outputWriter = new PrintWriter(new File(countWordsTaskOutputFilePath));
-			outputWriter.print(outputData);
-			outputWriter.close();
-		} catch(IOException e){
-			e.printStackTrace();
+		File inputDir = (File) input;
+		File outputDir = (File) output;
+		
+		for (File inputFile : inputDir.listFiles()) {
+			String fileContent = Utility.getStringDataFromFile(inputFile);
+			String[] array = fileContent.split(" ");
+			Map<String, Integer> contentCountMap = getContentCountMap(array);
+			String outputData = getContentCountMapDataInString(contentCountMap);
+			try{
+				File outputFile = new File(outputDir, inputFile.getName());
+				PrintWriter outputWriter = new PrintWriter(outputFile);
+				outputWriter.print(outputData);
+				outputWriter.close();
+			} catch(IOException e){
+				e.printStackTrace();
+			}
 		}
 		
 		System.out.println("counting unique words from Text file - End");

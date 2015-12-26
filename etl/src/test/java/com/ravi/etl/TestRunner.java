@@ -9,9 +9,9 @@ public class TestRunner {
 	public static void main(String[] args) {
 		Result result = JUnitCore.runClasses(JunitTestSuite.class);
 	      for (Failure failure : result.getFailures()) {
-	         System.out.println("Failed test case - " + failure.toString());
+	         System.out.println("\nFailed test case - " + failure.toString());
 	      }
-	      System.out.println("Have all Test cases passed? " + result.wasSuccessful());
+	      System.out.println("\nHave all Test cases passed? " + (result.wasSuccessful() ? "Yes" : "No"));
 	}
 
 }

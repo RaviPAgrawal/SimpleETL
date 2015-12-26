@@ -16,12 +16,12 @@ public class EtlSubject {
 		this.source = source;
 	}
 
-	public void capitalizeContent(){
-		source.capitalizeContent();
+	public void capitalizeContent(Object input, Object output){
+		source.capitalizeContent(input, output);
 	}
 
-	public void countWords(){
-		source.countWords();
+	public void countWords(Object input, Object output){
+		source.countWords(input, output);
 	}
 
 }
