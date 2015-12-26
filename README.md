@@ -10,5 +10,5 @@ Read from file
 Count unique words  
 Write to another file  
 
-Run TestRunner.java to run and validate test cases
+Run <b>TestRunner.java</b> to run and validate test cases
 
